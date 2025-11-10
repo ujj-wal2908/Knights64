@@ -23,12 +23,10 @@ function parseCSV(text) {
 // Function to fetch and process the data
 async function loadMemes() {
     // Check if the link has been changed
-    // ========= THIS IS THE LINE WE FIXED =========
     if (GOOGLE_SHEET_CSV_URL === 'PASTE_YOUR_GOOGLE_SHEET_CSV_LINK_HERE') {
         document.getElementById('meme-of-the-week').innerHTML = '<p style="color: red; text-align: center; font-weight: bold;">ERROR: You need to paste your Google Sheet link into the script.js file!</p>';
         return;
     }
-    // ============================================
 
     try {
         const response = await fetch(GOOGLE_SHEET_CSV_URL);
@@ -63,10 +61,12 @@ async function loadMemes() {
             if (row.ImageUrl && row.IsWinner !== 'TRUE') {
                 const card = document.createElement('div');
                 card.className = 'meme-card';
+                // ========= THIS IS THE LINE WE FIXED =========
                 card.innerHTML = `
-                    <img src="${row.ImageUrl}" alt="MS SubmitterName}">
+                    <img src="${row.ImageUrl}" alt="Meme by ${row.SubmitterName}">
                     <p>Submitted by: ${row.SubmitterName}</p>
                 `;
+                // ============================================
                 gallery.appendChild(card);
             }
         }

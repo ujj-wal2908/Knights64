@@ -29,7 +29,8 @@ async function loadMemes() {
     }
 
     try {
-        const response = await fetch(GOOGLE_SHEET_CSV_URL);
+        // We add a cache-busting query to fetch fresh data every time.
+        const response = await fetch(GOOGLE_SHEET_CSV_URL + '&t=' + new Date().getTime());
         const csvText = await response.text();
         const data = parseCSV(csvText);
 
@@ -61,12 +62,11 @@ async function loadMemes() {
             if (row.ImageUrl && row.IsWinner !== 'TRUE') {
                 const card = document.createElement('div');
                 card.className = 'meme-card';
-                // ========= THIS IS THE LINE WE FIXED =========
+                // THIS IS THE LINE THAT WAS FIXED
                 card.innerHTML = `
                     <img src="${row.ImageUrl}" alt="Meme by ${row.SubmitterName}">
                     <p>Submitted by: ${row.SubmitterName}</p>
                 `;
-                // ============================================
                 gallery.appendChild(card);
             }
         }

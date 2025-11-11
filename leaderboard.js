@@ -14,15 +14,15 @@ function parseCSV(text) {
         // Trim quotes from "quoted values"
         const cleanValues = values.map(val => val.replace(/^"|"$/g, '').trim());
 
-        // === THIS IS THE UPDATED SECTION ===
-        // We are now using the correct column numbers from the form
+        // === THIS SECTION IS CORRECT ===
+        // We are using the correct column numbers from your form
         return {
-            Name: cleanValues[2] ? cleanValues[2] : '',            
-            ChessUsername: cleanValues[3] ? cleanValues[3] : '',   
-            Rating: cleanValues[4] ? cleanValues[4] : 'Unrated',   
-            ProfilePhotoUrl: cleanValues[5] ? cleanValues[5] : '' 
+            Name: cleanValues[2] ? cleanValues[2] : '',            // Column C
+            ChessUsername: cleanValues[3] ? cleanValues[3] : '',   // Column D
+            Rating: cleanValues[4] ? cleanValues[4] : 'Unrated',   // Column E
+            ProfilePhotoUrl: cleanValues[5] ? cleanValues[5] : '' // Column F
         };
-        // ===================================
+        // ===============================
     });
 }
 
@@ -46,7 +46,7 @@ async function loadLeaderboard() {
 
         for (const member of data) {
             if (member.Name && member.ChessUsername) {
-                // Use a default icon if no photo is provided
+                // Use your default icon
                 const photoUrl = member.ProfilePhotoUrl || 'https://i.postimg.cc/FRxxYV0s/Screenshot-2025-11-11-131635.png';
                 const profileLink = `https://www.chess.com/member/${member.ChessUsername}`;
 

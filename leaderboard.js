@@ -47,7 +47,9 @@ async function loadLeaderboard() {
         for (const member of data) {
             if (member.Name && member.ChessUsername) {
                 // Use your default icon
-                const photoUrl = member.ProfilePhotoUrl || 'https://i.postimg.cc/8CqRSjQG/Screenshot-2025-11-11-131635.png';
+                const photoUrl = (member.ProfilePhotoUrl && member.ProfilePhotoUrl.length > 0) 
+                    ? member.ProfilePhotoUrl 
+                    : 'https://i.postimg.cc/8CqRSjQG/Screenshot-2025-11-11-131635.png';
                 const profileLink = `https://www.chess.com/member/${member.ChessUsername}`;
 
                 const card = document.createElement('div');

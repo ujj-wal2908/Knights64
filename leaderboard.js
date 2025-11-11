@@ -39,7 +39,7 @@ async function loadLeaderboard() {
         for (const member of data) {
             if (member.Name && member.ChessUsername) {
                 // Use a default icon if no photo is provided
-                const photoUrl = member.ProfilePhotoUrl || 'https://images.chesscomfiles.com/uploads/v2/images_users/less_files/300x300/default_light.png';
+                const photoUrl = member.ProfilePhotoUrl || 'https://i.postimg.cc/FRxxYV0s/Screenshot-2025-11-11-131635.png';
                 const profileLink = `https://www.chess.com/member/${member.ChessUsername}`;
 
                 const card = document.createElement('div');

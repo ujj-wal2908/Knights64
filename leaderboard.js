@@ -1,20 +1,28 @@
 // -----------------------------------------------------------------
-// 1. PASTE YOUR *NEW* LEADERBOARD GOOGLE SHEET LINK HERE
+// 1. PASTE YOUR *NEW* "FORM RESPONSES" GOOGLE SHEET LINK HERE
 // -----------------------------------------------------------------
-const LEADERBOARD_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeyHTUiIS_et9RPwAtHIkCt5IJo3MluqMYzAynpYLJJVxEn0fhIBrtCGvVa6Cz7dmNa2He6jcEOm3m/pub?output=csv';
+const LEADERBOARD_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeyHTUiIS_et9RPwAtHIkCt5IJo3MluqMYzAynpYLJJVxEn0fhIBrtCGvVa6Cz7dmNa2He6jcEOm3m/pub?gid=1976313506&single=true&output=csv';
 // -----------------------------------------------------------------
 
 
 // Function to parse CSV data
 function parseCSV(text) {
     return text.split('\n').slice(1).map(line => {
-        const values = line.split(',');
+        // Handle potential commas inside quoted values
+        const values = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
+        
+        // Trim quotes from "quoted values"
+        const cleanValues = values.map(val => val.replace(/^"|"$/g, '').trim());
+
+        // === THIS IS THE UPDATED SECTION ===
+        // We are now using the correct column numbers from the form
         return {
-            Name: values[0] ? values[0].trim() : '',
-            ChessUsername: values[1] ? values[1].trim() : '',
-            Rating: values[2] ? values[2].trim() : 'Unrated',
-            ProfilePhotoUrl: values[3] ? values[3].trim() : ''
+            Name: cleanValues[1] ? cleanValues[1] : '',            // Was [0]
+            ChessUsername: cleanValues[2] ? cleanValues[2] : '',   // Was [1]
+            Rating: cleanValues[3] ? cleanValues[3] : 'Unrated',   // Was [2]
+            ProfilePhotoUrl: cleanValues[4] ? cleanValues[4] : '' // Was [3]
         };
+        // ===================================
     });
 }
 

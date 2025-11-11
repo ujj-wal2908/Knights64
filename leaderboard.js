@@ -2,6 +2,19 @@
 // 1. PASTE YOUR *NEW* "FORM RESPONSES" GOOGLE SHEET LINK HERE
 // -----------------------------------------------------------------
 const LEADERBOARD_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeyHTUiIS_et9RPwAtHIkCt5IJo3MluqMYzAynpYLJJVxEn0fhIBrtCGvVa6Cz7dmNa2He6jcEOm3m/pub?gid=1976313506&single=true&output=csv';
+
+// -----------------------------------------------------------------
+// 2. ADD YOUR FOUR IMAGE PATHS HERE
+// -----------------------------------------------------------------
+// Place your 4 images in the same folder as your index.html
+// and update the names here.
+const defaultPhotos = [
+    'https://i.postimg.cc/8CqRSjQG/Screenshot-2025-11-11-131635.png', // <-- Replace with your image name
+    'https://i.postimg.cc/vxtXnw6n/Screenshot-2025-11-11-183513.png', // <-- Replace with your image name
+    'https://i.postimg.cc/8fmwvgrH/Screenshot-2025-11-11-183522.png', // <-- Replace with your image name
+    'https://i.postimg.cc/JH5KXCBc/Screenshot-2025-11-11-183529.png',
+    'https://i.postimg.cc/MfmtBJjm/Screenshot-2025-11-11-183537.png'
+];
 // -----------------------------------------------------------------
 
 
@@ -14,12 +27,11 @@ function parseCSV(text) {
         // Trim quotes from "quoted values"
         const cleanValues = values.map(val => val.replace(/^"|"$/g, '').trim());
 
-        // We are using the correct column numbers from your form
+        // We no longer need the photo URL from the sheet
         return {
             Name: cleanValues[2] ? cleanValues[2] : '',            // Column C
             ChessUsername: cleanValues[3] ? cleanValues[3] : '',   // Column D
-            Rating: cleanValues[4] ? cleanValues[4] : 'Unrated',   // Column E
-            ProfilePhotoUrl: cleanValues[5] ? cleanValues[5] : '' // Column F
+            Rating: cleanValues[4] ? cleanValues[4] : 'Unrated'    // Column E
         };
     });
 }
@@ -45,13 +57,11 @@ async function loadLeaderboard() {
         for (const member of data) {
             if (member.Name && member.ChessUsername) {
                 
-                // ========= THIS IS THE NEW, BULLETPROOF FIX =========
-                // 1. Check if the string has length
-                // 2. Use a new, 100% working PostImages link
-                const photoUrl = (member.ProfilePhotoUrl && member.ProfilePhotoUrl.length > 0) 
-                    ? member.ProfilePhotoUrl 
-                    : 'https://i.postimg.cc/8CqRSjQG/Screenshot-2025-11-11-131635.png';
-                // ===================================================
+                // ========= THIS IS THE NEW RANDOM LOGIC =========
+                // Pick a random number between 0 and 3
+                const photoIndex = Math.floor(Math.random() * defaultPhotos.length);
+                const photoUrl = defaultPhotos[photoIndex];
+                // ================================================
 
                 const profileLink = `https://www.chess.com/member/${member.ChessUsername}`;
 

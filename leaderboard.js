@@ -17,10 +17,10 @@ function parseCSV(text) {
         // === THIS IS THE UPDATED SECTION ===
         // We are now using the correct column numbers from the form
         return {
-            Name: cleanValues[1] ? cleanValues[1] : '',            // Was [0]
-            ChessUsername: cleanValues[2] ? cleanValues[2] : '',   // Was [1]
-            Rating: cleanValues[3] ? cleanValues[3] : 'Unrated',   // Was [2]
-            ProfilePhotoUrl: cleanValues[4] ? cleanValues[4] : '' // Was [3]
+            Name: cleanValues[2] ? cleanValues[2] : '',            
+            ChessUsername: cleanValues[3] ? cleanValues[3] : '',   
+            Rating: cleanValues[4] ? cleanValues[4] : 'Unrated',   
+            ProfilePhotoUrl: cleanValues[5] ? cleanValues[5] : '' 
         };
         // ===================================
     });

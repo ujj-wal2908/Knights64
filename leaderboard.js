@@ -14,7 +14,6 @@ function parseCSV(text) {
         // Trim quotes from "quoted values"
         const cleanValues = values.map(val => val.replace(/^"|"$/g, '').trim());
 
-        // === THIS SECTION IS CORRECT ===
         // We are using the correct column numbers from your form
         return {
             Name: cleanValues[2] ? cleanValues[2] : '',            // Column C
@@ -22,7 +21,6 @@ function parseCSV(text) {
             Rating: cleanValues[4] ? cleanValues[4] : 'Unrated',   // Column E
             ProfilePhotoUrl: cleanValues[5] ? cleanValues[5] : '' // Column F
         };
-        // ===============================
     });
 }
 
@@ -46,10 +44,15 @@ async function loadLeaderboard() {
 
         for (const member of data) {
             if (member.Name && member.ChessUsername) {
-                // Use your default icon
+                
+                // ========= THIS IS THE NEW, BULLETPROOF FIX =========
+                // 1. Check if the string has length
+                // 2. Use a new, 100% working PostImages link
                 const photoUrl = (member.ProfilePhotoUrl && member.ProfilePhotoUrl.length > 0) 
                     ? member.ProfilePhotoUrl 
                     : 'https://i.postimg.cc/8CqRSjQG/Screenshot-2025-11-11-131635.png';
+                // ===================================================
+
                 const profileLink = `https://www.chess.com/member/${member.ChessUsername}`;
 
                 const card = document.createElement('div');

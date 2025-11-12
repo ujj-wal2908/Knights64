@@ -268,3 +268,80 @@ nav a.active {
 .winner-event-card .winner-info {
     flex-grow: 1;
 }
+
+/* =================================
+   VOTE BUTTON STYLES
+   ================================= */
+.vote-button-container {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.vote-button {
+    display: inline-block;
+    background-color: #7289da;
+    color: #ffffff;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 1.1em;
+    border: none; /* Buttons have borders, anchors don't */
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.vote-button:hover {
+    background-color: #5f73bc;
+    transform: scale(1.05);
+}
+
+/* =================================
+   MODAL (POPUP) STYLES
+   ================================= */
+
+/* The Modal (background overlay) - hidden by default */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; /* Sit on top of everything */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black with opacity */
+}
+
+/* Modal Content (the white box) */
+.modal-content {
+    background-color: #ffffff;
+    color: #333; /* Dark text for light background */
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 25px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 700px; /* Max width */
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* The Close Button ("X") */
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: #000;
+}
+
+/* Modal Iframe */
+.modal-content iframe {
+    border-radius: 8px;
+    margin-top: 20px;
+}
